@@ -8,11 +8,15 @@ const PATHS = {
 
 const isDev = process.env.NODE_ENV === 'development';
 
+const plugins = isDev ? [new HtmlWebpackPlugin({
+	filename: 'index.html',
+	template: path.resolve(PATHS.root, 'index.html'),
+	hash: true,
+})] : [];
+
 module.exports = {
 	context: PATHS.root,
-	devtool: isDev
-		? 'cheap-module-eval-source-map' // For development
-		: 'source-map',
+	devtool: isDev ? 'cheap-module-eval-source-map' : false,
 	output: {
 		path: path.join(__dirname, 'build'),
 		filename: 'bundle.min.js',
@@ -78,11 +82,5 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			filename: 'index.html',
-			template: path.resolve(PATHS.root, 'index.html'),
-			hash: true,
-		})
-	]
+	plugins
 };

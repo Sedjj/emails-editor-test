@@ -44,6 +44,7 @@
 			"error",
 			"never"
 		],
+		"no-var": 0,
 		"quotes": [
 			"error",
 			"single",
@@ -51,6 +52,7 @@
 				"allowTemplateLiterals": true
 			}
 		],
+		"prefer-const": 0,
 		"indent": "off",
 		"max-len": [
 			"error",
