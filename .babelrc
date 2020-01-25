@@ -1,0 +1,37 @@
+{
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"corejs": 3,
+				"useBuiltIns": "usage",
+				"shippedProposals": true,
+				"targets": {
+					"firefox": "68",
+					"chrome": "70",
+					"ie": "11"
+				}
+			}
+		],
+		[
+			"@babel/preset-typescript",
+			{
+				"isTSX": true,
+				"allExtensions": true
+			}
+		]
+	],
+	"plugins": [
+		
+	],
+	"overrides": [
+		{
+			"test": "./node_modules",
+			"sourceType": "unambiguous"
+		}
+	],
+	"ignore": [
+		"core-js",
+		"node_modules"
+	]
+}
