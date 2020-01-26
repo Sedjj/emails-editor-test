@@ -82,5 +82,12 @@ module.exports = {
 			}
 		]
 	},
-	plugins
+	plugins,
+	resolve: {
+		extensions: [' ', '.ts', '.js', '.less'],
+		modules: [
+			PATHS.root,
+			'node_modules'
+		]
+	},
 };

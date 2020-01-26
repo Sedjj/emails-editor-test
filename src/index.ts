@@ -1,8 +1,12 @@
+import {Area} from './components/Area/Area';
+import {Button} from './components/Button/Button';
 import './index.less';
 
 interface IEmailsEditor {
-	container: Element | null;
-	name: string;
+	container?: Element | null;
+	header?: string;
+	width?: number;
+	height?: number;
 }
 
 interface ISubscriber {
@@ -15,16 +19,59 @@ interface IEmit {
 }
 
 export class EmailsEditor {
-	private container: Element | null = null;
+	// private readonly container: Element | null = null;
 	private emit: IEmit | null = null;
 	private emails: string[] = [];
 
 	constructor(props: IEmailsEditor) {
-		if (props.container != null) {
-			this.container = props.container;
+		if (props.container) {
 			let form = document.createElement('div');
-			form.innerText = 'Hello';
-			this.container.append(form);
+			form.classList.add('frame');
+			form.style.width = (props.width || 0) + 'px';
+			form.style.height = (props.height || 0) + 'px';
+
+			let header = document.createElement('div');
+			header.classList.add('header');
+			form.append(header);
+
+			let title = document.createElement('span');
+			title.classList.add('title');
+			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
+			form.append(title);
+
+			let area = new Area();
+			form.append(area.getNode());
+
+			let addEmail = new Button({
+				value: 'Add email',
+				btn: {
+					width: 98,
+					left: 50,
+				},
+				text: {
+					left: 16.33,
+					right: 16.33,
+				}
+			});
+			addEmail.addEvent(this.addEmails);
+			addEmail.getNode();
+			form.append(addEmail.getNode());
+
+			let countEmails = new Button({
+				value: 'Get emails count',
+				btn: {
+					width: 142,
+					left: 164,
+				},
+				text: {
+					left: 11.27,
+					right: 10.56,
+				}
+			});
+			countEmails.addEvent(this.getCountEmails);
+			form.append(countEmails.getNode());
+
+			props.container.append(form);
 		}
 	}
 
@@ -45,14 +92,23 @@ export class EmailsEditor {
 	public subscribe(emit: IEmit): void {
 		this.emit = emit;
 	}
+
+	private getCountEmails = (): number => {
+		return this.emails.length;
+	};
+
+	private addEmails = (): void => {
+		// eslint-disable-next-line no-console
+		console.log('addEmails: ', this.emails);
+	};
 }
 
 if (process.env.NODE_ENV === 'development') {
 	const emailsEditor = new EmailsEditor({
 		container: document.querySelector('#emails-editor'),
-		...{
-			name: '1'
-		}
+		header: 'Share <b>Board name</b> with other',
+		width: 540,
+		height: 300
 	});
 	emailsEditor.setEmails(['john@miro.com']);
 	emailsEditor.subscribe(({name, emails}: ISubscriber): void => {

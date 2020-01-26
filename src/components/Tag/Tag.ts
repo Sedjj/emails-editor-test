@@ -1,6 +1,6 @@
-import './index.less';
+import './Tag.less';
 
-export class Area {
+export class Tag {
 	private readonly tagName: string;
 	private count: number;
 
