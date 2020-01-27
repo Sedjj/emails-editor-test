@@ -1,6 +1,7 @@
 import {Area} from './components/Area/Area';
 import {Button} from './components/Button/Button';
 import './index.less';
+import {getEmail} from './utils/randomEmail';
 
 interface IEmailsEditor {
 	container?: Element | null;
@@ -98,8 +99,7 @@ export class EmailsEditor {
 	};
 
 	private addEmails = (): void => {
-		// eslint-disable-next-line no-console
-		console.log('addEmails: ', this.emails);
+		this.emails.push(getEmail());
 	};
 }
 
