@@ -1,33 +1,63 @@
+import {Tag} from '../Tag/Tag';
 import './Area.less';
 
-/*import {Tag} from '../Tag/Tag';*/
+interface IEmit {
+	(item: string[]): void;
+}
+
+interface IProps {
+	emit: IEmit;
+}
 
 export class Area {
 	private readonly area: HTMLElement;
 
-	constructor() {
+	constructor(props: IProps) {
 		this.area = document.createElement('div');
-		this.area.classList.add('body');
+		this.area.classList.add('container');
 
-		let li = document.createElement('div');
-		li.classList.add('first-item');
-		li.innerText = 'add more people';
-		this.area.append(li);
-		
-		/*let addEmail = new Tag({
-			value: 'Add email',
-			btn: {
-				width: 98,
-				left: 50,
-			},
-			text: {
-				left: 16.33,
-				right: 16.33,
+		let input = document.createElement('input');
+		input.classList.add('item-input');
+		input.placeholder = 'add more people';
+
+		let firstItem = document.createElement('div');
+		firstItem.classList.add('item', 'first');
+
+		input.addEventListener('keydown', this.handleKeydown.bind(this, props), false);
+
+		/*input.addEventListener('change', (event: KeyboardEvent) => {
+			const result = document.querySelector('.result');
+			result.textContent = `You like ${event.target['value']}`;
+
+			if (event.code == 'Enter' && event.target) {     //&& (event.ctrlKey || event.metaKey)
+				props.emit([event.target['value']]);
 			}
-		});
-		addEmail.addEvent(this.addEmails);
-		addEmail.getNode();
-		form.append(addEmail.getNode());*/
+		}, false);*/
+
+		this.area.addEventListener('click', () => {
+			input.focus();
+		}, false);
+		firstItem.append(input);
+		this.area.append(firstItem);
+	}
+
+	private handleKeydown(props: IProps, event: KeyboardEvent): void {
+		if ((event.code == 'Enter' || event.code == 'NumpadEnter') && event.target) {     //&& (event.ctrlKey || event.metaKey)
+			const newTag = event.target['value'];
+			props.emit([newTag]);
+			this.newTags(newTag);
+			event.target['value'] = '';
+		}
+	}
+
+	private newTags(value?: string): void {
+		if (value != null) {
+			let emails: string[] = value.replace(/\s/g, '').split(',');
+			emails.forEach(item => {
+				let tag = new Tag(item);
+				this.area.insertBefore(tag.getNode(), this.area.lastChild);
+			});
+		}
 	}
 
 	public getNode(): HTMLElement {

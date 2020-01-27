@@ -40,7 +40,9 @@ export class EmailsEditor {
 			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
 			form.append(title);
 
-			let area = new Area();
+			let area = new Area({
+				emit: this.addEmails
+			});
 			form.append(area.getNode());
 
 			let addEmail = new Button({
@@ -54,7 +56,7 @@ export class EmailsEditor {
 					right: 16.33,
 				}
 			});
-			addEmail.addEvent(this.addEmails);
+			addEmail.addEvent(this.generateEmail);
 			addEmail.getNode();
 			form.append(addEmail.getNode());
 
@@ -98,8 +100,24 @@ export class EmailsEditor {
 		return this.emails.length;
 	};
 
-	private addEmails = (): void => {
+	private generateEmail = (): void => {
 		this.emails.push(getEmail());
+		if (this.emit) {
+			this.emit({
+				name: 'setEmails',
+				emails: this.emails
+			});
+		}
+	};
+
+	private addEmails = (emails: string[]): void => {
+		this.emails = this.emails.concat(emails);
+		if (this.emit) {
+			this.emit({
+				name: 'setEmails',
+				emails: this.emails
+			});
+		}
 	};
 }
 
