@@ -19,7 +19,9 @@ module.exports = {
 	devtool: isDev ? 'cheap-module-eval-source-map' : false,
 	output: {
 		path: path.join(__dirname, 'build'),
-		filename: 'bundle.min.js',
+		filename: 'emails-editor.js',
+		libraryTarget: 'umd',
+		globalObject: 'this',
 	},
 	entry: PATHS.index,
 	devServer: {

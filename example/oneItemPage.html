@@ -6,16 +6,27 @@
 		<title>emails-editor</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="theme-color" content="#000000">
+		<script type='text/javascript' src="../build/emails-editor.js"></script>
 	</head>
 	<body id="body">
-	<div id="emails-editor"></div>
-	<script src="../build/bundle.min.js"></script>
+		<div>
+			<div id="emails-editor"></div>
+		</div>
+
 	<script>
 		const container = document.querySelector('#emails-editor');
 		let options = {
-			header: '1'
+			header: 'Share <b>Board name</b> with other',
+			width: 700,
+			height: 300
 		};
-		EmailsEditor({container, ...options})
+		const emailsEditor = new EmailsEditor({container, ...options});
+
+		emailsEditor.subscribe(({name, emails}) => {
+			// eslint-disable-next-line no-console
+			console.log('emails-editor - name: ', name, ' emails: ', emails);
+		});
+		emailsEditor.setEmails(['john@miro.com', 'patric@miro.com']);
 	</script>
 	</body>
 </html>
