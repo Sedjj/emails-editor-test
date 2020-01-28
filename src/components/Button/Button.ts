@@ -21,13 +21,11 @@ interface IOptions {
 }
 
 export class Button {
-	private readonly btn: HTMLElement;
-
-	constructor({value, btn, text}: IOptions) {
-		this.btn = document.createElement('div');
-		this.btn.classList.add('btn');
-		this.btn.style.width = (btn.width || 0) + 'px';
-		this.btn.style.left = (btn.left || 0) + 'px';
+	private static init({value, btn, text}: IOptions): HTMLElement {
+		let button = document.createElement('div');
+		button.classList.add('btn');
+		button.style.width = (btn.width || 0) + 'px';
+		button.style.left = (btn.left || 0) + 'px';
 
 		let span = document.createElement('span');
 		span.classList.add('text');
@@ -38,8 +36,15 @@ export class Button {
 		let background = document.createElement('div');
 		background.classList.add('background');
 
-		this.btn.append(background);
-		this.btn.append(span);
+		button.append(background);
+		button.append(span);
+		return button;
+	}
+
+	private readonly btn: HTMLElement;
+
+	constructor(props: IOptions) {
+		this.btn = Button.init(props);
 	}
 
 	public addEvent(onClick: IClick): void {

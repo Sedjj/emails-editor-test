@@ -1,5 +1,6 @@
 import {Area} from './components/Area/Area';
 import {Button} from './components/Button/Button';
+import {Tag} from './components/Tag/Tag';
 import './index.less';
 import {getEmail} from './utils/randomEmail';
 
@@ -20,11 +21,18 @@ interface IEmit {
 }
 
 export class EmailsEditor {
-	// private readonly container: Element | null = null;
 	private emit: IEmit | null = null;
+	private area: Area;
 	private emails: string[] = [];
 
 	constructor(props: IEmailsEditor) {
+		this.init(props);
+	}
+
+	/**
+	 * Метод для инициализации компонета, составление dom структуры и навешивание событий.
+	 */
+	private init(props: IEmailsEditor): void {
 		if (props.container) {
 			let form = document.createElement('div');
 			form.classList.add('frame');
@@ -40,10 +48,9 @@ export class EmailsEditor {
 			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
 			form.append(title);
 
-			let area = new Area({
-				emit: this.addEmails
-			});
-			form.append(area.getNode());
+			this.area = new Area();
+			this.area.subscribe(this.addEmails);
+			form.append(this.area.getNode());
 
 			let addEmail = new Button({
 				value: 'Add email',
@@ -76,64 +83,116 @@ export class EmailsEditor {
 
 			props.container.append(form);
 		}
-	}
+	};
 
-	public setEmails(emails: string[]): void {
-		this.emails = emails;
+	/**
+	 * Метод для добавления к списку emails.
+	 */
+	public setEmails = (emails: string[]): void => {
+		if (emails && emails.length > 0) {
+			let newList = emails.filter(x => this.emails.indexOf(x));
+			this.emails = this.emails.concat(newList);
+			newList.forEach(email => {
+				let tag = new Tag(email);
+				this.area.getNode().insertBefore(tag.getNode(), this.area.getNode().lastChild);
+			});
+			if (this.emit) {
+				this.emit({
+					name: 'setEmails',
+					emails: this.emails
+				});
+			}
+		}
+	};
+
+	private getCountEmails = (): void => {
+		alert(this.emails.length);
+	};
+
+	/**
+	 * Метод для генерации случайного emails и добавление его в конец списка.
+	 */
+	private generateEmail = (): void => {
+		const email = getEmail();
+		this.emails.push(email);
+		let tag = new Tag(email);
+		this.area.getNode().insertBefore(tag.getNode(), this.area.getNode().lastChild);
 		if (this.emit) {
 			this.emit({
-				name: 'setEmails',
+				name: 'generateEmail',
 				emails: this.emails
 			});
 		}
+	};
+
+	/**
+	 * Метод для добавления новых emails к списку
+	 *
+	 * @param {String} name назваие event
+	 * @param {String[]} emails список новых emails
+	 */
+	private addEmails = ({name, emails}: ISubscriber): void => {
+		if (emails && emails.length > 0) {
+			switch (name) {
+				case 'newTag': {
+					this.emails = this.emails.concat(emails);
+					break;
+				}
+				case 'changeTag': {// TODO нужно ли редактирование
+					this.emails = this.emails.concat(emails);
+					break;
+				}
+				case 'deleteTag': {
+					this.emails = this.emails.filter(x=> emails.indexOf(x));
+					break;
+				}
+			}
+			if (this.emit) {
+				this.emit({
+					name: name,
+					emails: this.emails
+				});
+			}
+		}
+	};
+
+	/**
+	 * Метод для иницализации подписки.
+	 *
+	 * @param {IEmit} emit функция которая будет вызываться при поднятии собятия.
+	 */
+	public subscribe(emit: IEmit): void {
+		this.emit = emit;
 	}
 
 	public getEmails(): string[] {
 		return this.emails;
 	}
-
-	public subscribe(emit: IEmit): void {
-		this.emit = emit;
-	}
-
-	private getCountEmails = (): number => {
-		return this.emails.length;
-	};
-
-	private generateEmail = (): void => {
-		this.emails.push(getEmail());
-		if (this.emit) {
-			this.emit({
-				name: 'setEmails',
-				emails: this.emails
-			});
-		}
-	};
-
-	private addEmails = (emails: string[]): void => {
-		this.emails = this.emails.concat(emails);
-		if (this.emit) {
-			this.emit({
-				name: 'setEmails',
-				emails: this.emails
-			});
-		}
-	};
 }
 
 if (process.env.NODE_ENV === 'development') {
 	const emailsEditor = new EmailsEditor({
 		container: document.querySelector('#emails-editor'),
 		header: 'Share <b>Board name</b> with other',
-		width: 540,
+		width: 700,
 		height: 300
 	});
-	emailsEditor.setEmails(['john@miro.com']);
+
 	emailsEditor.subscribe(({name, emails}: ISubscriber): void => {
 		// eslint-disable-next-line no-console
-		console.log('name: ', name, ' emails: ', emails);
+		console.log('emails-editor - name: ', name, ' emails: ', emails);
 	});
 	emailsEditor.setEmails(['john@miro.com', 'patric@miro.com']);
-	// eslint-disable-next-line no-console
-	console.log('getEmails: ', emailsEditor.getEmails());
+
+	const emailsEditorSupport = new EmailsEditor({
+		container: document.querySelector('#emails-editor-support'),
+		header: 'Share <b>Board name</b> with other',
+		width: 700,
+		height: 300
+	});
+	emailsEditorSupport.subscribe(({name, emails}: ISubscriber): void => {
+		// eslint-disable-next-line no-console
+		console.log('emails-editor-support - name: ', name, ' emails: ', emails);
+	});
+	emailsEditorSupport.setEmails(['john@miro.com']);
 }
