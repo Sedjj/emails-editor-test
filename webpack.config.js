@@ -46,7 +46,7 @@ module.exports = {
 				options: {
 					babelrc: true,
 					extends: path.resolve(__dirname, '.babelrc'),
-					/*cacheDirectory: true*/
+					cacheDirectory: true
 				}
 			},
 			{

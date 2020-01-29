@@ -1,15 +1,6 @@
-/*import remove from '../../assets/remove.svg';*/
+import {IEmit} from '../../types/index';
 import {validEmail} from '../../utils/checkValidEmail';
 import './Tag.less';
-
-interface ISubscriber {
-	name: string;
-	emails: string[];
-}
-
-interface IEmit {
-	(item: ISubscriber): void;
-}
 
 export class Tag {
 	/**

@@ -6,7 +6,6 @@
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server --mode=development --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --mode=production --config webpack.config.js --progress --profile --colors",
-    "test-unit": "cross-env NODE_ENV=test jest --config jest.config.js --env=jsdom --no-cache",
     "eslint": "eslint --cache --ext ..ts,.tsx,.jsx,.js src/"
   },
   "repository": {
@@ -39,7 +38,6 @@
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
-    "eslint-plugin-jest": "^23.6.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.10.3",

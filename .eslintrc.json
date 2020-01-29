@@ -8,12 +8,9 @@
 		// adds all ECMAScript 2017 globals and automatically sets the ecmaVersion parser option to 8.
 		"es2017": true,
 		// adds all ECMAScript 2020 globals and automatically sets the ecmaVersion parser option to 11.
-		"es2020": true,
-		"jest": true
+		"es2020": true
 	},
 	"extends": [
-		"plugin:jest/recommended",
-		"plugin:jest/style",
 		// Базовые правила для TypeScript
 		"plugin:@typescript-eslint/recommended"
 	],
@@ -25,11 +22,10 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"jest",
 		"@typescript-eslint"
 	],
 	"rules": {
-		// разрешить console
+		// запретить console
 		"no-console": [
 			"error",
 			{
@@ -145,27 +141,6 @@
 					}
 				],
 				"@typescript-eslint/explicit-member-accessibility": "off"
-			}
-		},
-		{
-			// только тесты
-			"files": [
-				"*.test.js",
-				"*.spec.js"
-			],
-			"rules": {
-				"@typescript-eslint/explicit-function-return-type": "off",
-				"react/react-in-jsx-scope": "off",
-				"react/jsx-no-undef": "off",
-				"no-unused-expressions": "off",
-				"no-console": "off",
-
-				"jest/no-disabled-tests": "warn",
-				"jest/no-focused-tests": "error",
-				"jest/no-identical-title": "error",
-				"jest/prefer-to-have-length": "warn",
-				"jest/valid-expect": "error",
-				"jest/no-commented-out-tests": "off"
 			}
 		}
 	]

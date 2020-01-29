@@ -1,14 +1,6 @@
+import {IEmit, ISubscriber} from '../../types/index';
 import {Tag} from '../Tag/Tag';
 import './Area.less';
-
-interface ISubscriber {
-	name: string;
-	emails: string[];
-}
-
-interface IEmit {
-	(item: ISubscriber): void;
-}
 
 export class Area {
 	private readonly area: HTMLElement;

@@ -1,13 +1,5 @@
 import './Button.less';
-
-interface IClick {
-	(this: HTMLElement, ev: HTMLElementEventMap[keyof HTMLElementEventMap]): void;
-}
-
-interface IOptions {
-	value: string;
-	indent?: boolean;
-}
+import {IClick, IOptions} from '../../types/index';
 
 export class Button {
 	private static init({value, indent}: IOptions): HTMLElement {

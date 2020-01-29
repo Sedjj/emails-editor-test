@@ -2,23 +2,8 @@ import {Area} from './components/Area/Area';
 import {Button} from './components/Button/Button';
 import {Tag} from './components/Tag/Tag';
 import './index.less';
+import {IEmailsEditor, IEmit, ISubscriber} from './types/index';
 import {getEmail} from './utils/randomEmail';
-
-interface IEmailsEditor {
-	container?: Element | null;
-	header?: string;
-	width?: number;
-	height?: number;
-}
-
-interface ISubscriber {
-	name: string;
-	emails: string[];
-}
-
-interface IEmit {
-	(item: ISubscriber): void;
-}
 
 export class EmailsEditor {
 	private emit: IEmit | null = null;
@@ -47,7 +32,7 @@ export class EmailsEditor {
 			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
 
 			this.area = new Area();
-			this.area.subscribe(this.addEmails);
+			this.area.subscribe(this.emitEmails);
 
 			let buttonGroup = document.createElement('div');
 			buttonGroup.classList.add('btn-group');
@@ -115,14 +100,10 @@ export class EmailsEditor {
 	 * @param {String} name назваие event
 	 * @param {String[]} emails список новых emails
 	 */
-	private addEmails = ({name, emails}: ISubscriber): void => {
+	private emitEmails = ({name, emails}: ISubscriber): void => {
 		if (emails && emails.length > 0) {
 			switch (name) {
 				case 'newTag': {
-					this.emails = this.emails.concat(emails);
-					break;
-				}
-				case 'changeTag': {// TODO нужно ли редактирование
 					this.emails = this.emails.concat(emails);
 					break;
 				}
@@ -179,4 +160,6 @@ if (process.env.NODE_ENV === 'development') {
 		console.log('emails-editor-support - name: ', name, ' emails: ', emails);
 	});
 	emailsEditorSupport.setEmails(['john@miro.com']);
+	// eslint-disable-next-line no-console
+	console.log('emails-editor-support - getEmails: ', emailsEditorSupport.getEmails());
 }
