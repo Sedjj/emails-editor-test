@@ -1,7 +1,12 @@
-// TODO нужен уникальный идентификатор
+@font-face {
+	font-family: 'OpenSans';
+	src: local("Open Sans"),
+	url('fonts/OpenSans.ttf') format('truetype');
+}
+
 .frame {
 	position: relative;
-	font-family: Open Sans, serif;
+	font-family: 'OpenSans', serif;
 	font-style: normal;
 	font-weight: normal;
 
@@ -11,11 +16,8 @@
 
 	span.title {
 		position: absolute;
-		left: 9.26%;
-		right: 9.26%;
-		top: 10.67%;
-		bottom: 80%;
-
+		left: 50px;
+		top: 32px;
 		font-size: 20px;
 		line-height: 27px;
 		color: #050038;
@@ -26,9 +28,15 @@
 		left: 0;
 		right: 0;
 		top: 0;
-		bottom: 32%;
-
+		bottom: 96px;
 		background: #F8F8F7;
 		border-radius: 8px 8px 0 0;
+	}
+
+	div.btn-group {
+		position: absolute;
+		bottom: 32px;
+		left: 50px;
+		right: 50px;
 	}
 }

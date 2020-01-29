@@ -12,6 +12,24 @@ interface IEmit {
 }
 
 export class Tag {
+	/**
+	 * Метод для создания иконки exit
+	 */
+	private static createSVG(): SVGSVGElement {
+		let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		svg.setAttribute('width', '8');
+		svg.setAttribute('height', '8');
+		svg.setAttribute('viewBox', '0 0 8 8');
+		svg.setAttribute('fill', 'none');
+		let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		path.setAttribute('fill-rule', 'evenodd');
+		path.setAttribute('clip-rule', 'evenodd');
+		path.setAttribute('d', 'M8 0.8L7.2 0L4 3.2L0.8 0L0 0.8L3.2 4L0 7.2L0.8 8L4 4.8L7.2 8L8 7.2L4.8 4L8 0.8Z');
+		path.setAttribute('fill', '#050038');
+		svg.appendChild(path);
+		return svg;
+	}
+
 	private readonly tag: HTMLElement;
 	private emit: IEmit | null = null;
 
@@ -38,13 +56,12 @@ export class Tag {
 		}
 		content.innerText = value;
 
-		let img: HTMLElement = document.createElement('span');
-		img.classList.add('email-exit');
-		img.innerHTML = 'x';
+		let svg: SVGSVGElement = Tag.createSVG();
+		svg.classList.add('email-exit');
 
 		tag.append(input);
 		tag.append(content);
-		tag.append(img);
+		tag.append(svg);
 
 		input.addEventListener('input', this.handleChange.bind(this, tag));
 		input.addEventListener('blur', this.handleSave.bind(this, tag));
@@ -52,7 +69,7 @@ export class Tag {
 			e.stopPropagation();
 		});
 		content.addEventListener('click', this.handleEdit.bind(this, tag, input));
-		img.addEventListener('click', this.handleDelete.bind(this, tag));
+		svg.addEventListener('click', this.handleDelete.bind(this, tag));
 		return tag;
 	}
 

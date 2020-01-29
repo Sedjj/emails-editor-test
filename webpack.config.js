@@ -83,8 +83,12 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.svg$/,
-				loader: 'svg-inline-loader'
+				test: /\.(woff|woff2|eot|ttf)$/,
+				loader: "file-loader",
+				options: {
+					useRelativePath: false,
+					name: "[path][name].[ext]"
+				}
 			}
 		]
 	},

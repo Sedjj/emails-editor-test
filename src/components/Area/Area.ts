@@ -30,7 +30,7 @@ export class Area {
 		input.placeholder = 'add more people';
 
 		let firstItem = document.createElement('div');
-		firstItem.classList.add('item', 'first');
+		firstItem.classList.add('first');
 
 		input.addEventListener('keydown', this.handleKeydown, false);
 		input.addEventListener('blur', this.handleSave);

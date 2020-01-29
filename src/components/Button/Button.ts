@@ -4,33 +4,21 @@ interface IClick {
 	(this: HTMLElement, ev: HTMLElementEventMap[keyof HTMLElementEventMap]): void;
 }
 
-interface IBtn {
-	width: number;
-	left: number;
-}
-
-interface IText {
-	left: number;
-	right: number;
-}
-
 interface IOptions {
 	value: string;
-	btn: IBtn;
-	text: IText;
+	indent?: boolean;
 }
 
 export class Button {
-	private static init({value, btn, text}: IOptions): HTMLElement {
+	private static init({value, indent}: IOptions): HTMLElement {
 		let button = document.createElement('div');
 		button.classList.add('btn');
-		button.style.width = (btn.width || 0) + 'px';
-		button.style.left = (btn.left || 0) + 'px';
+		if (indent) {
+			button.classList.add('indent');
+		}
 
 		let span = document.createElement('span');
 		span.classList.add('text');
-		span.style.left = (text.left || 0) + '%';
-		span.style.right = (text.right || 0) + '%';
 		span.innerText = value;
 
 		let background = document.createElement('div');
@@ -51,10 +39,9 @@ export class Button {
 		this.btn.addEventListener('click', onClick, false);
 	}
 
-	public removeEvent(onClick: IClick): void {
-		this.btn.removeEventListener('click', onClick, false);
-	}
-
+	/**
+	 * Метод для получения текущего узла элемента
+	 */
 	public getNode(): HTMLElement {
 		return this.btn;
 	}

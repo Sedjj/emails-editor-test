@@ -41,45 +41,29 @@ export class EmailsEditor {
 
 			let header = document.createElement('div');
 			header.classList.add('header');
-			form.append(header);
 
 			let title = document.createElement('span');
 			title.classList.add('title');
 			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
-			form.append(title);
 
 			this.area = new Area();
 			this.area.subscribe(this.addEmails);
-			form.append(this.area.getNode());
 
-			let addEmail = new Button({
-				value: 'Add email',
-				btn: {
-					width: 98,
-					left: 50,
-				},
-				text: {
-					left: 16.33,
-					right: 16.33,
-				}
-			});
+			let buttonGroup = document.createElement('div');
+			buttonGroup.classList.add('btn-group');
+
+			let addEmail = new Button({value: 'Add email', indent: true});
 			addEmail.addEvent(this.generateEmail);
-			addEmail.getNode();
-			form.append(addEmail.getNode());
 
-			let countEmails = new Button({
-				value: 'Get emails count',
-				btn: {
-					width: 142,
-					left: 164,
-				},
-				text: {
-					left: 11.27,
-					right: 10.56,
-				}
-			});
+			let countEmails = new Button({value: 'Get emails count'});
 			countEmails.addEvent(this.getCountEmails);
-			form.append(countEmails.getNode());
+
+			header.append(title);
+			header.append(this.area.getNode());
+			buttonGroup.append(addEmail.getNode());
+			buttonGroup.append(countEmails.getNode());
+			form.append(header);
+			form.append(buttonGroup);
 
 			props.container.append(form);
 		}
@@ -175,7 +159,7 @@ if (process.env.NODE_ENV === 'development') {
 		container: document.querySelector('#emails-editor'),
 		header: 'Share <b>Board name</b> with other',
 		width: 700,
-		height: 300
+		height: 370
 	});
 
 	emailsEditor.subscribe(({name, emails}: ISubscriber): void => {
@@ -187,7 +171,7 @@ if (process.env.NODE_ENV === 'development') {
 	const emailsEditorSupport = new EmailsEditor({
 		container: document.querySelector('#emails-editor-support'),
 		header: 'Share <b>Board name</b> with other',
-		width: 700,
+		width: 530,
 		height: 300
 	});
 	emailsEditorSupport.subscribe(({name, emails}: ISubscriber): void => {
