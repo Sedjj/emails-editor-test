@@ -19,7 +19,7 @@ export class Area {
 
 		let input: HTMLInputElement = document.createElement('input');
 		input.classList.add('first-input');
-		input.placeholder = 'add more people';
+		input.placeholder = 'add email';
 
 		let firstItem: HTMLDivElement = document.createElement('div');
 		firstItem.classList.add('first');
