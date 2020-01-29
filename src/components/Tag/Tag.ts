@@ -54,75 +54,10 @@ export class Tag {
 		tag.append(content);
 		tag.append(svg);
 
-		input.addEventListener('input', this.handleChange.bind(this, tag));
-		input.addEventListener('blur', this.handleSave.bind(this, tag));
-		content.addEventListener('dblclick', (e: MouseEvent) => {
-			e.stopPropagation();
-		});
-		content.addEventListener('click', this.handleEdit.bind(this, tag, input));
 		svg.addEventListener('click', this.handleDelete.bind(this, tag));
 		return tag;
 	}
 
-	/**
-	 * Включать редактирование тега при клике по нему.
-	 *
-	 * @param {HTMLElement} tag instance объекта
-	 * @param {HTMLElement} input instance объекта
-	 * @param {MouseEvent} event нажатия на div
-	 */
-	private handleEdit = (tag: HTMLElement, input: HTMLElement, event: MouseEvent): void => {
-		let contentEl: Element | null = tag.querySelector('.email-content');
-		let svgEl: Element | null = tag.querySelector('.email-exit');
-		if (input && contentEl && svgEl) {
-			tag.classList.add('clear-background');
-			input.classList.add('show');
-			contentEl.classList.add('hide');
-			svgEl.classList.add('hide');
-			input.focus();
-			event.stopPropagation();
-		}
-	};
-
-	/**
-	 * Включать редактирование тега при клике по нему.
-	 */
-	private handleChange = (tag: HTMLElement, event: Event): void => {
-		let content: Element | null = tag.querySelector('.email-content');
-		if (content && event.target) {
-			content.innerHTML = event.target['value'];
-		}
-	};
-
-	/**
-	 * Метод сохранения изменения тега после потери фокуса.
-	 *
-	 * @param {HTMLElement} tag instance объекта
-	 */
-	private handleSave = (tag: HTMLElement): void => {
-		let input: Element | null = tag.querySelector('.email-input');
-		let content: Element | null = tag.querySelector('.email-content');
-		let svg: Element | null = tag.querySelector('.email-exit');
-		if (input && content && svg && content.textContent) {
-			tag.classList.remove('clear-background');
-			input.classList.remove('show');
-			content.classList.remove('hide');
-			svg.classList.remove('hide');
-			if (validEmail(content.textContent)) {
-				tag.classList.remove('clear-background');
-				content.classList.remove('error');
-			} else {
-				tag.classList.add('clear-background');
-				content.classList.add('error');
-			}
-			if (this.emit) {
-				this.emit({
-					name: 'changeTag',
-					emails: [content.textContent]
-				});
-			}
-		}
-	};
 
 	/**
 	 * Метод сохранения изменения тега после потери фокуса.

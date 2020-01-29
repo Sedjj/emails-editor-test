@@ -2,22 +2,16 @@ import './Button.less';
 import {IClick, IOptions} from '../../types/index';
 
 export class Button {
+	/**
+	 * Метод для инициализации компонета, составление dom структуры.
+	 */
 	private static init({value, indent}: IOptions): HTMLElement {
 		let button = document.createElement('div');
 		button.classList.add('btn');
+		button.innerText = value;
 		if (indent) {
 			button.classList.add('indent');
 		}
-
-		let span = document.createElement('span');
-		span.classList.add('text');
-		span.innerText = value;
-
-		let background = document.createElement('div');
-		background.classList.add('background');
-
-		button.append(background);
-		button.append(span);
 		return button;
 	}
 
