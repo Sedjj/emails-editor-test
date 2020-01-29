@@ -4,8 +4,6 @@
 export interface IEmailsEditor {
 	container?: Element | null;
 	header?: string;
-	width?: number;
-	height?: number;
 }
 
 /**

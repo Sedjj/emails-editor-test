@@ -72,7 +72,7 @@ export class Area {
 			let emails: string[] = value.replace(/\s/g, '').split(',').filter(x => x != '');
 			emails.forEach(item => {
 				let tag = new Tag(item);
-				tag.subscribe(this.addEmails);
+				tag.subscribe(this.emitEmails);
 				this.area.insertBefore(tag.getNode(), this.area.lastChild);
 			});
 			if (this.emit) {
@@ -90,7 +90,7 @@ export class Area {
 	 * @param {String} name назваие event
 	 * @param {String[]} emails список новых emails
 	 */
-	private addEmails = ({name, emails}: ISubscriber): void => {
+	private emitEmails = ({name, emails}: ISubscriber): void => {
 		if (emails && emails.length > 0) {
 			if (this.emit) {
 				this.emit({

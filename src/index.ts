@@ -21,8 +21,6 @@ export class EmailsEditor {
 		if (props.container) {
 			let form = document.createElement('div');
 			form.classList.add('frame');
-			form.style.width = (props.width || 0) + 'px';
-			form.style.height = (props.height || 0) + 'px';
 
 			let header = document.createElement('div');
 			header.classList.add('header');
@@ -63,6 +61,7 @@ export class EmailsEditor {
 			this.emails = this.emails.concat(newList);
 			newList.forEach(email => {
 				let tag = new Tag(email);
+				tag.subscribe(this.emitEmails);
 				this.area.getNode().insertBefore(tag.getNode(), this.area.getNode().lastChild);
 			});
 			if (this.emit) {
@@ -85,6 +84,7 @@ export class EmailsEditor {
 		const email = getEmail();
 		this.emails.push(email);
 		let tag = new Tag(email);
+		tag.subscribe(this.emitEmails);
 		this.area.getNode().insertBefore(tag.getNode(), this.area.getNode().lastChild);
 		if (this.emit) {
 			this.emit({
@@ -138,9 +138,7 @@ export class EmailsEditor {
 if (process.env.NODE_ENV === 'development') {
 	const emailsEditor = new EmailsEditor({
 		container: document.querySelector('#emails-editor'),
-		header: 'Share <b>Board name</b> with other',
-		width: 700,
-		height: 370
+		header: 'Share <b>Board name</b> with other'
 	});
 
 	emailsEditor.subscribe(({name, emails}: ISubscriber): void => {
@@ -151,9 +149,7 @@ if (process.env.NODE_ENV === 'development') {
 
 	const emailsEditorSupport = new EmailsEditor({
 		container: document.querySelector('#emails-editor-support'),
-		header: 'Share <b>Board name</b> with other',
-		width: 530,
-		height: 300
+		header: 'Share <b>Board name</b> with other'
 	});
 	emailsEditorSupport.subscribe(({name, emails}: ISubscriber): void => {
 		// eslint-disable-next-line no-console

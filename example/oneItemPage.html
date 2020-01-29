@@ -16,16 +16,11 @@
 		<script type='text/javascript' src="../build/emails-editor.js"></script>
 	</head>
 	<body id="body">
-		<div>
-			<div id="emails-editor"></div>
-		</div>
-
+		<div id="emails-editor" style="width: 700px;height: 370px;"></div>
 	<script>
 		const container = document.querySelector('#emails-editor');
 		let options = {
-			header: 'Share <b>Board name</b> with other',
-			width: 700,
-			height: 300
+			header: 'Share <b>Board name</b> with other'
 		};
 		const emailsEditor = new EmailsEditor({container, ...options});
 

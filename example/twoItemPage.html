@@ -16,19 +16,13 @@
 		<script type='text/javascript' src="../build/emails-editor.js"></script>
 	</head>
 	<body id="body">
-		<div>
-			<div id="emails-editor"></div>
-		</div>
+		<div id="emails-editor" style="width: 700px;height: 370px;"></div>
 		<br /><br />
-		<div>
-			<div id="emails-editor-support"></div>
-		</div>
+		<div id="emails-editor-support" style="width: 530px;height: 300px;"></div>
 	<script>
 		const emailsEditor = new EmailsEditor({
 			container: document.querySelector('#emails-editor'),
-			header: 'Share <b>Board name</b> with other',
-			width: 770,
-			height: 400
+			header: 'Share <b>Board name</b> with other'
 		});
 
 		emailsEditor.subscribe(({name, emails}) => {
@@ -38,9 +32,7 @@
 
 		const emailsEditorSupport = new EmailsEditor({
 			container: document.querySelector('#emails-editor-support'),
-			header: 'Share <b>Board name</b> with other',
-			width: 540,
-			height: 340
+			header: 'Share <b>Board name</b> with other'
 		});
 		emailsEditorSupport.subscribe(({name, emails}) => {
 			console.log('emails-editor-support - name: ', name, ' emails: ', emails);
