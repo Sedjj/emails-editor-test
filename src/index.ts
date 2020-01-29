@@ -19,26 +19,26 @@ export class EmailsEditor {
 	 */
 	private init(props: IEmailsEditor): void {
 		if (props.container) {
-			let form = document.createElement('div');
+			let form: HTMLDivElement = document.createElement('div');
 			form.classList.add('frame');
 
-			let header = document.createElement('div');
+			let header: HTMLDivElement = document.createElement('div');
 			header.classList.add('header');
 
-			let title = document.createElement('span');
+			let title: HTMLSpanElement = document.createElement('span');
 			title.classList.add('title');
 			title.innerHTML = props.header || 'Share <b>Board name</b> with other';
 
 			this.area = new Area();
 			this.area.subscribe(this.emitEmails);
 
-			let buttonGroup = document.createElement('div');
+			let buttonGroup: HTMLDivElement = document.createElement('div');
 			buttonGroup.classList.add('btn-group');
 
-			let addEmail = new Button({value: 'Add email', indent: true});
+			let addEmail: Button = new Button({value: 'Add email', indent: true});
 			addEmail.addEvent(this.generateEmail);
 
-			let countEmails = new Button({value: 'Get emails count'});
+			let countEmails: Button = new Button({value: 'Get emails count'});
 			countEmails.addEvent(this.getCountEmails);
 
 			header.append(title);

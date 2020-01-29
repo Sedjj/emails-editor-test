@@ -14,22 +14,23 @@ export class Area {
 	 * Метод для инициализации компонета, составление dom структуры и навешивание событий.
 	 */
 	private init(): HTMLElement {
-		let area = document.createElement('div');
+		let area: HTMLDivElement = document.createElement('div');
 		area.classList.add('container');
 
-		let input = document.createElement('input');
-		input.classList.add('item-input');
+		let input: HTMLInputElement = document.createElement('input');
+		input.classList.add('first-input');
 		input.placeholder = 'add more people';
 
-		let firstItem = document.createElement('div');
+		let firstItem: HTMLDivElement = document.createElement('div');
 		firstItem.classList.add('first');
 
 		input.addEventListener('keydown', this.handleKeydown, false);
 		input.addEventListener('blur', this.handleSave);
-
 		area.addEventListener('click', () => input.focus(), false);
+
 		firstItem.append(input);
 		area.append(firstItem);
+
 		return area;
 	}
 

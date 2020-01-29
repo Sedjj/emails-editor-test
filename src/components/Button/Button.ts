@@ -6,7 +6,7 @@ export class Button {
 	 * Метод для инициализации компонета, составление dom структуры.
 	 */
 	private static init({value, indent}: IOptions): HTMLElement {
-		let button = document.createElement('div');
+		let button: HTMLDivElement = document.createElement('div');
 		button.classList.add('btn');
 		button.innerText = value;
 		if (indent) {
