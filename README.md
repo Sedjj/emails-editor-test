@@ -51,6 +51,10 @@ emailsEditor.setEmails(['john@test.com', 'patric@test.com']);
 emailsEditorSupport.getEmails()
 ```                               
 
+####Demo
+Демонстрационный пример можно найти по ссылке [клик](https://sedjj.github.io/emails-editor-test/).
+А в проекте это файл index.html
+
 ####Author
 * Salimzebarov Eldar
 
