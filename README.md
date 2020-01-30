@@ -4,7 +4,7 @@
 ### Технологии
 Компонент написан на TypeScript и Less, сборка проектна осуществляется через webpack  
 
-### Пример использования `emails-editor.js`
+### Пример использования
 
 Подключаем файл компонета
 ```html
@@ -29,20 +29,20 @@
 ```html
 <script>
     let options = {                            
-		container: document.querySelector('#emails-editor'),
+        container: document.querySelector('#emails-editor'),
         header: 'Share <b>Board name</b> with other'
     };
     const emailsEditor = new EmailsEditor(options);
 </script>
 ```
 
-Компонент позволяет сделать подписку на изменения списка emails, где name может быть `newTag, generateEmail, deleteTag, setEmails`, a в emails приходит массив строк `['john@test.com', 'patric@test.com']`  
+Компонент позволяет сделать подписку на изменения списка emails, где `name` может быть (`newTag, generateEmail, deleteTag, setEmails`), a в emails приходит массив строк `['john@test.com', 'patric@test.com']`  
 ```javascript
 emailsEditor.subscribe(({name, emails}) => {
 	console.log('emails-editor - name: ', name, ' emails: ', emails);
 });
 ```  
-Для добавления emails в форма есть метод `setEmails` 
+Для добавления emails из кодв у компонента есть метод `setEmails` 
 ```javascript
 emailsEditor.setEmails(['john@test.com', 'patric@test.com']);
 ```        
@@ -59,4 +59,4 @@ emailsEditorSupport.getEmails()
 * Salimzebarov Eldar
 
 ### License
-This project is open source and available under the MIT License.
+    This project is open source and available under the MIT License.
