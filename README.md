@@ -8,7 +8,7 @@
 
 Подключаем файл компонета
 ```html
-<script type='text/javascript' src="https://cdn.rawgit.com/Sedjj/emails-editor-test/gh-pages/build/emails-editor.js"></script>
+<script type='text/javascript' src="https://cdn.rawgit.com/Sedjj/emails-editor-test/master/build/emails-editor.js"></script>
 ```
 Устанавливаем необходимые шрифты. Название шрифта в компоненте `CustomFont`, поэтому делаем alias с таким же названием. Если этого не сделать то будет стандартный шрифт. 
 ```html
@@ -16,7 +16,7 @@
     @font-face {
         font-family: 'CustomFont';
         src: local("Open Sans"),
-        url('https://cdn.rawgit.com/Sedjj/emails-editor-test/gh-pages/build/fonts/OpenSans.ttf') format('truetype');
+        url('https://cdn.rawgit.com/Sedjj/emails-editor-test/master/build/fonts/OpenSans.ttf') format('truetype');
     }
 </style>
 ```
