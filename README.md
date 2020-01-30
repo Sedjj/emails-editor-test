@@ -1,10 +1,10 @@
 ## Emails-editor
 Компонент формы с тегами для ввода emails.
 
-#### Технологии
+### Технологии
 Компонент написан на TypeScript и Less, сборка проектна осуществляется через webpack  
 
-#### Пример использования `emails-editor.js`
+### Пример использования `emails-editor.js`
 
 Подключаем файл компонета
 ```html
@@ -51,12 +51,12 @@ emailsEditor.setEmails(['john@test.com', 'patric@test.com']);
 emailsEditorSupport.getEmails()
 ```                               
 
-#### Demo
+### Demo
 Демонстрационный пример можно найти по ссылке [клик](https://sedjj.github.io/emails-editor-test/).
 А в проекте это файл index.html
 
-#### Author
+### Author
 * Salimzebarov Eldar
 
-#### License
+### License
 This project is open source and available under the MIT License.
