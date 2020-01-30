@@ -1,19 +1,22 @@
 ## Emails-editor
-Тестовое задание ui component
+Компонент формы с тегами для ввода emails.
 
-#### Пример использования `emails-editor.js`:
+####Технологии
+Компонент написан на TypeScript и Less, сборка проектна осуществляется через webpack  
+
+####Пример использования `emails-editor.js`
 
 Подключаем файл компонета
 ```html
-<script type='text/javascript' src="../build/emails-editor.js"></script>
+<script type='text/javascript' src="https://cdn.rawgit.com/Sedjj/emails-editor-test/gh-pages/build/emails-editor.js"></script>
 ```
-Устанавливаем необходимые шрифты. Название шрифта в компоненте `CustomFont`, поэтому делаем alias с таким же названием 
+Устанавливаем необходимые шрифты. Название шрифта в компоненте `CustomFont`, поэтому делаем alias с таким же названием. Если этого не сделать то будет стандартный шрифт. 
 ```html
 <style>
     @font-face {
         font-family: 'CustomFont';
         src: local("Open Sans"),
-        url('../build/fonts/OpenSans.ttf') format('truetype');
+        url('https://cdn.rawgit.com/Sedjj/emails-editor-test/gh-pages/build/fonts/OpenSans.ttf') format('truetype');
     }
 </style>
 ```
@@ -46,4 +49,10 @@ emailsEditor.setEmails(['john@test.com', 'patric@test.com']);
 Для получения текущего списка emails `getEmails` 
 ```javascript
 emailsEditorSupport.getEmails()
-```
+```                               
+
+####Author
+* Salimzebarov Eldar
+
+####License
+This project is open source and available under the MIT License.
