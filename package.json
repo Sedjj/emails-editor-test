@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Sedjj/emails-editor#readme",
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
+    "@babel/cli": "^7.21.0",
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -46,6 +46,6 @@
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.3"
+    "webpack-dev-server": "^4.11.1"
   }
 }
